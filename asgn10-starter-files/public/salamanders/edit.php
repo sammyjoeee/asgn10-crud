@@ -5,19 +5,27 @@ if(!isset($_GET['id'])) {
 }
 $id = $_GET['id'];
 $salamanderName = '';
-$position = '';
-$visible = '';  
+$habitat = '';
+$description = '';  
 
 if(is_post_request()) {
 
   // Handle form values sent by new.php
 
-  $menu_name = $_POST['salamanderName'] ?? '';
-  $position = $_POST['position'] ?? '';
-  $visible = $_POST['visible'] ?? '';
+  $name = $_POST['salamanderName'] ?? '';
+  $habitat = $_POST['habitat'] ?? '';
+  $description = $_POST['description'] ?? '';
 
   echo "Form parameters<br />";
   echo "Salamander name: " . $salamanderName . "<br />";
+} else {
+
+  $salamanders = find_all_salamanders($id);
+
+  $salamanders_set = find_all_salamanders();
+  $salamanders_count = mysqli_num_rows($salamanders_set);
+  mysqli_free_result($salamanders_set);
+
 }
 
 ?>
